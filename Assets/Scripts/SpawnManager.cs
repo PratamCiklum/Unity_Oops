@@ -15,24 +15,33 @@ public class SpawnManager : MonoBehaviour
     void Start()
     {
         objectPooler = ObjectPooler.Instance;
-        string enemyT = enemyTag[Random.Range(0, enemyTag.Length)];
-        Debug.Log(enemyT);
-        StartCoroutine(SpawnEnemy());
-        //InvokeRepeating("SpawnEnemy", 1f, 3f);
+        //string enemyT = enemyTag[Random.Range(0, enemyTag.Length)];
+        //Debug.Log(enemyT);
+        //StartCoroutine(SpawnEnemy());
+        InvokeRepeating("SpawnEnemy", 1f, 3f);
     }
-    IEnumerator SpawnEnemy()
-    {
-        while (true)
-        {
-            //int index = Random.Range(0, count);
-            float xPos = Random.Range(-xRange, xRange);
-            Vector3 enemyPos = new Vector3(xPos, yPos, 0);
-            string enemyT = enemyTag[Random.Range(0, enemyTag.Length)];
-            objectPooler.SpawnFromPool(enemyT, enemyPos, Quaternion.identity, Vector3.down);
-            yield return new WaitForSeconds(2.5f);
-        }
-    }
+    //IEnumerator SpawnEnemy()
+    //{
+    //    while (true)
+    //    {
+    //        int index = Random.Range(0, enemy.Count);
+    //        float xPos = Random.Range(-xRange, xRange);
+    //        Vector3 enemyPos = new Vector3(xPos, yPos, 0);
+    //        string enemyT = enemyTag[Random.Range(0, enemyTag.Length)];
+    //        objectPooler.SpawnFromPool(enemyT, enemyPos, enemy[index].transform.rotation, Vector3.down);
+    //        yield return new WaitForSeconds(2.5f);
+    //    }
+    //}
 
+    void SpawnEnemy()
+    {
+        //int index = Random.Range(0, enemy.Count);
+        float xPos = Random.Range(-xRange, xRange);
+        Vector3 enemyPos = new Vector3(xPos, yPos, 0);
+        string enemyT = enemyTag[Random.Range(0, enemyTag.Length)];
+        objectPooler.SpawnFromPool(enemyT, enemyPos,transform.rotation);
+        //yield return new WaitForSeconds(2.5f);
+    }
 
     // Update is called once per frame
 

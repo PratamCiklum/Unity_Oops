@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space)) 
         {
-            objectPooler.SpawnFromPool("Sphere", new Vector3(transform.position.x, transform.position.y + 0.43f, transform.position.z), transform.rotation,Vector3.up);
+            objectPooler.SpawnFromPool("Player Bullet", new Vector3(transform.position.x, transform.position.y + 0.43f, transform.position.z), transform.rotation);
         }
     }
 

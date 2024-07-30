@@ -1,11 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements.Experimental;
 
 public class Bullets : MonoBehaviour
 {
-    [SerializeField] float bulletSpeed = 2;
-    private Vector3 direction;
+    protected float bulletSpeed = 4;
     // Start is called before the first frame update
     void Start()
     {
@@ -13,13 +13,15 @@ public class Bullets : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
-        transform.Translate(direction * bulletSpeed * Time.deltaTime);
+        MoveForward();
     }
 
-    public void SetDirection(Vector3 newDirection)
-    {
-        direction = newDirection;
+
+
+    protected virtual void MoveForward() 
+    { 
+        transform.Translate(Vector3.up * bulletSpeed * Time.deltaTime);
     }
 }

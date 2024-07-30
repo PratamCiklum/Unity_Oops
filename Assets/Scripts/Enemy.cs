@@ -11,15 +11,27 @@ public abstract class Enemy : MonoBehaviour
 
     public virtual void MoveForward()
     {
-        transform.Translate(Vector3.down*speed*Time.deltaTime);
+        transform.Translate(Vector3.down * speed * Time.deltaTime);
     }
 
     public void TakeDamage(int damage)
     {
         health -= damage;
-        if(health < 0)
+        if (health < 0)
         {
             Die();
+        }
+    }
+
+    protected virtual void OnTriggerEnter(Collider other)
+    {
+        if (!other.gameObject.CompareTag("Enemy Bullet"))
+        {
+            gameObject.SetActive(false);
+        }
+        if (!other.gameObject.CompareTag("Player"))
+        {
+            other.gameObject.SetActive(false);
         }
     }
 
@@ -32,6 +44,8 @@ public abstract class Enemy : MonoBehaviour
     {
         MoveForward();
     }
+
+
 
     public abstract void Attack();
 }

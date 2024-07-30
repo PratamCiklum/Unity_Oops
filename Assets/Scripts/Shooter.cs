@@ -12,15 +12,23 @@ public class Shooter : Enemy
         objectPooler = ObjectPooler.Instance;
         InvokeRepeating("Attack", 1f, 1f);
     }
-    // Start is called before the first frame update
 
-    // Update is called once per frame
-    public override void Update()
+
+    protected override void OnTriggerEnter(Collider other)
     {
-        base.Update();
+        base.OnTriggerEnter(other);
+        if (other.gameObject.CompareTag("Bullet") || other.gameObject.CompareTag("Player"))
+        {
+            CancelInvoke("Attack"); // Cancel attack invocation when Shooter is hit
+        }
     }
     public override void Attack()
     {
-        objectPooler.SpawnFromPool("Sphere",transform.position,transform.rotation,Vector3.down);
+            objectPooler.SpawnFromPool("Enemy Bullet", new Vector3(transform.position.x,transform.position.y-0.43f,transform.position.z), transform.rotation);
+    }
+
+    private void OnDisable()
+    {
+        CancelInvoke("Attack");
     }
 }

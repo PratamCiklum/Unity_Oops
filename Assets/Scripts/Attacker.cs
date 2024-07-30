@@ -15,6 +15,11 @@ public class Attacker : Enemy
     {
         Attack();
     }
+
+    protected override void OnTriggerEnter(Collider other)
+    {
+        base.OnTriggerEnter(other);
+    }
     public override void Attack()
     {
        
